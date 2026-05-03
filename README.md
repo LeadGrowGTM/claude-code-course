@@ -64,12 +64,23 @@ Working examples from the course. Drop these into `.claude/skills/` in your work
 | [Claude Code Docs](https://docs.anthropic.com/en/docs/claude-code) | Official documentation | Start here. Everything else builds on this. |
 | [Claude Code GitHub](https://github.com/anthropics/claude-code) | Source + issues | Bug reports, feature requests, community discussion |
 
+### Claude Code Power Tools
+
+| Repo | What | Why |
+|------|------|-----|
+| [Get Shit Done (GSD)](https://github.com/LeadGrowGTM/get-shit-done-claude) | Meta-prompting, context engineering, spec-driven development system | The project management layer. Plan phases, execute with verification, track progress across sessions. Turns Claude from chatbot to project manager. |
+| [Caveman Mode](https://github.com/cabbageamulet/claude-code-caveman) | Ultra-compressed communication skill | Cuts tokens ~75%. Same technical substance, zero filler. Essential for long sessions. |
+| [Agent Browser](https://github.com/vercel-labs/agent-browser) | Browser automation CLI for AI agents | Navigate pages, fill forms, take screenshots, scrape data — all from Claude Code. Web QA, research, automation. |
+| [Continuous Claude](https://github.com/LeadGrowGTM/internal-continuous-claude) | Context management via hooks and ledgers | Solves the "Claude forgot everything" problem. Handoffs, state persistence, MCP execution without context pollution. |
+| [DeepSeek Stack](https://github.com/LeadGrowGTM/claudecode-deepseek-stack) | Run Claude Code on DeepSeek V4 for ~$7/mo | 95x cheaper than Anthropic billing. Two env vars, no third-party tool. |
+
 ### GTM Skills (Open Source)
 
 | Repo | What | Why |
 |------|------|-----|
 | [Poke the Bear Skill](https://github.com/LeadGrowGTM/poke-the-bear-skill) | Josh Braun's cold email methodology as a Claude Code skill | Principle-driven outbound. No templates — generates from pain points. |
-| [DeepSeek Stack](https://github.com/LeadGrowGTM/claudecode-deepseek-stack) | Run Claude Code on DeepSeek V4 for ~$7/mo | 95x cheaper than Anthropic billing. Two env vars, no third-party tool. |
+| [Reddit Find](https://github.com/LeadGrowGTM/reddit-find) | GTM research from Reddit | Discover communities, extract pain points, buyer language, content angles. Two-pass workflow: scan titles fast, then deep-dive posts. |
+| [n8n CLI](https://github.com/LeadGrowGTM/leadgrow-n8n-cli) | The most comprehensive n8n CLI — 85+ commands | 100% API coverage, GitOps, Clay integration, workflow templates, MCP server. Control n8n from Claude Code. |
 
 ### MCP Servers for GTM
 
