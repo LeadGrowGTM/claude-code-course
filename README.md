@@ -80,7 +80,6 @@ Working examples from the course. Drop these into `.claude/skills/` in your work
 |------|------|-----|
 | [Poke the Bear Skill](https://github.com/LeadGrowGTM/poke-the-bear-skill) | Josh Braun's cold email methodology as a Claude Code skill | Principle-driven outbound. No templates — generates from pain points. |
 | [Reddit Find](https://github.com/LeadGrowGTM/reddit-find) | GTM research from Reddit | Discover communities, extract pain points, buyer language, content angles. Two-pass workflow: scan titles fast, then deep-dive posts. |
-| [n8n CLI](https://github.com/LeadGrowGTM/leadgrow-n8n-cli) | The most comprehensive n8n CLI — 85+ commands | 100% API coverage, GitOps, Clay integration, workflow templates, MCP server. Control n8n from Claude Code. |
 
 ### MCP Servers for GTM
 
@@ -105,6 +104,15 @@ To add an MCP server, edit `.mcp.json` in your project root (see `examples/.mcp.
 | **Trigger.dev** | Durable execution, retries, long-running cloud jobs | [trigger.dev](https://trigger.dev) |
 
 Rule: if it needs to think, use an agent. If it needs to repeat, automate. If both, agent skill triggered by automation.
+
+### Automation CLIs
+
+| Repo | What | Why |
+|------|------|-----|
+| [n8n CLI](https://github.com/LeadGrowGTM/leadgrow-n8n-cli) | 85+ commands, 100% n8n API coverage | GitOps, Clay integration, workflow templates. Control n8n from Claude Code. |
+| [Trigger.dev](https://github.com/triggerdotdev/trigger.dev) | Build and deploy durable AI agents and workflows | Code-first (TypeScript). Retries, checkpoints, observability. The cloud execution layer when local isn't enough. |
+
+Use these CLIs so Claude Code can manage your automation platforms directly from the terminal. No browser tabs.
 
 ### Data & Enrichment
 
