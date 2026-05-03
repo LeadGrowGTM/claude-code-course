@@ -53,6 +53,9 @@ Working examples from the course. Drop these into `.claude/skills/` in your work
 
 - **cold-email/** — Generate sequences using your voice guide and ICP
 - **prospect-research/** — Research a company and produce a campaign-ready brief
+- **reddit-find/** — Mine Reddit for pain points, buyer language, and content angles
+- **youtube-transcript/** — Fetch and analyze YouTube transcripts for content and research
+- **call-context/** — Turn sales call transcripts into campaign-ready briefs
 - **.mcp.json** — Starter MCP server config (Context7 pre-configured)
 
 ## Essential Tools & Repos
