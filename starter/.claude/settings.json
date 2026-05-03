@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Read",
+      "Glob",
+      "Grep"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo Done"
+          }
+        ]
+      }
+    ]
+  }
+}
