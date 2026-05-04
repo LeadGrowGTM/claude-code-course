@@ -265,6 +265,32 @@ Then in `.claude/settings.json`:
 }
 ```
 
+## VS Code / Cursor Extensions
+
+Install these in Cursor (or VS Code) once. They stay out of the way and make the terminal + Claude workflow faster.
+
+| Extension | ID | Why |
+|-----------|-----|-----|
+| **Claude Code** | `anthropic.claude-code` | First-class Claude integration -- chat, inline edits, slash commands |
+| **GitLens** | `eamodio.gitlens` | Inline blame, history, PR links. Makes `git log` visual. |
+| **Error Lens** | `usernamehw.errorlens` | Inline errors/warnings without hovering. Catches problems before Claude does. |
+| **Prettier** | `esbenp.prettier-vscode` | Auto-format on save. Keeps Claude's output consistent with your codebase. |
+| **DotENV** | `mikestead.dotenv` | Syntax highlighting for `.env` files. |
+| **Thunder Client** | `rangav.vscode-thunder-client` | Lightweight REST client inside VS Code. Good for testing CLI/API endpoints. |
+
+Install all at once from terminal:
+
+```bash
+code --install-extension anthropic.claude-code
+code --install-extension eamodio.gitlens
+code --install-extension usernamehw.errorlens
+code --install-extension esbenp.prettier-vscode
+code --install-extension mikestead.dotenv
+code --install-extension rangav.vscode-thunder-client
+```
+
+> Using Cursor? Replace `code` with `cursor` in the commands above.
+
 ## Course Slides
 
 View the full 44-slide deck: **[claude-code-course-kappa.vercel.app](https://claude-code-course-kappa.vercel.app)**
