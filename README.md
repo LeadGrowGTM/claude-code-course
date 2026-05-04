@@ -31,32 +31,32 @@ Copy these into your workspace root. Pre-configured CLAUDE.md, rules, settings, 
 
 ```
 starter/
-  CLAUDE.md              ← workspace identity + behavioral rules
+  CLAUDE.md              <- workspace identity + behavioral rules
   .claude/
-    settings.json        ← permissions allowlist
+    settings.json        <- permissions allowlist
     rules/
-      archive-safety.md  ← never delete, always archive
-      ask-vs-act.md      ← when to ask vs just do
-      file-conventions.md← where files go
+      archive-safety.md  <- never delete, always archive
+      ask-vs-act.md      <- when to ask vs just do
+      file-conventions.md<- where files go
   company/
-    ICP.md               ← ideal customer profile template
-    voice-guide.md       ← brand voice definition
-  campaigns/             ← active campaign work
-  clients/               ← per-client folders
-  content/               ← drafts, ideas, templates
-  archive/               ← completed work
+    ICP.md               <- ideal customer profile template
+    voice-guide.md       <- brand voice definition
+  campaigns/             <- active campaign work
+  clients/               <- per-client folders
+  content/               <- drafts, ideas, templates
+  archive/               <- completed work
 ```
 
 ### `/examples` — Real Skills & Configs
 
 Working examples from the course. Drop these into `.claude/skills/` in your workspace.
 
-- **cold-email/** — Generate sequences using your voice guide and ICP
-- **prospect-research/** — Research a company and produce a campaign-ready brief
-- **reddit-find/** — Mine Reddit for pain points, buyer language, and content angles
-- **youtube-transcript/** — Fetch and analyze YouTube transcripts for content and research
-- **call-context/** — Turn sales call transcripts into campaign-ready briefs
-- **.mcp.json** — Starter MCP server config (Context7 pre-configured)
+- **cold-email/** -- Generate sequences using your voice guide and ICP
+- **prospect-research/** -- Research a company and produce a campaign-ready brief
+- **reddit-find/** -- Mine Reddit for pain points, buyer language, and content angles
+- **youtube-transcript/** -- Fetch and analyze YouTube transcripts for content and research
+- **call-context/** -- Turn sales call transcripts into campaign-ready briefs
+- **.mcp.json** -- Starter MCP server config (Context7 pre-configured)
 
 ## Essential Tools & Repos
 
@@ -73,30 +73,83 @@ Working examples from the course. Drop these into `.claude/skills/` in your work
 |------|------|-----|
 | [Get Shit Done (GSD)](https://github.com/LeadGrowGTM/get-shit-done-claude) | Meta-prompting, context engineering, spec-driven development system | The project management layer. Plan phases, execute with verification, track progress across sessions. Turns Claude from chatbot to project manager. |
 | [Caveman Mode](https://github.com/cabbageamulet/claude-code-caveman) | Ultra-compressed communication skill | Cuts tokens ~75%. Same technical substance, zero filler. Essential for long sessions. |
-| [Agent Browser](https://github.com/vercel-labs/agent-browser) | Browser automation CLI for AI agents | Navigate pages, fill forms, take screenshots, scrape data — all from Claude Code. Web QA, research, automation. |
-| [Continuous Claude](https://github.com/LeadGrowGTM/internal-continuous-claude) | Context management via hooks and ledgers | Solves the "Claude forgot everything" problem. Handoffs, state persistence, MCP execution without context pollution. |
+| [Agent Browser](https://github.com/vercel-labs/agent-browser) | Browser automation CLI for AI agents | Navigate pages, fill forms, take screenshots, scrape data -- all from Claude Code. Web QA, research, automation. |
+| [Continuous Claude](https://github.com/LeadGrowGTM/internal-continuous-claude) *(optional)* | Context management via hooks and ledgers | Solves the "Claude forgot everything" problem. Handoffs, state persistence, MCP execution without context pollution. |
 | [DeepSeek Stack](https://github.com/LeadGrowGTM/claudecode-deepseek-stack) | Run Claude Code on DeepSeek V4 for ~$7/mo | 95x cheaper than Anthropic billing. Two env vars, no third-party tool. |
 
 ### GTM Skills (Open Source)
 
 | Repo | What | Why |
 |------|------|-----|
-| [Poke the Bear Skill](https://github.com/LeadGrowGTM/poke-the-bear-skill) | Josh Braun's cold email methodology as a Claude Code skill | Principle-driven outbound. No templates — generates from pain points. |
+| [Poke the Bear Skill](https://github.com/LeadGrowGTM/poke-the-bear-skill) | Josh Braun's cold email methodology as a Claude Code skill | Principle-driven outbound. No templates -- generates from pain points. |
 | [Reddit Find](https://github.com/LeadGrowGTM/reddit-find) | GTM research from Reddit | Discover communities, extract pain points, buyer language, content angles. Two-pass workflow: scan titles fast, then deep-dive posts. |
 
-### MCP Servers for GTM
+### MCP Servers
+
+One MCP. That's it.
 
 | Server | What | When to Use |
 |--------|------|-------------|
 | [Context7](https://github.com/upstash/context7) | Live docs for any framework | Day one install. Claude gets up-to-date docs without hallucinating. |
-| [Exa MCP](https://github.com/exa-labs/exa-mcp-server) | AI-native web search | Research prospects, find company info, competitive intel. |
-| [Google Drive MCP](https://github.com/nicholasgriffintn/google-drive-mcp) | Read/write Google Sheets & Docs | Lead lists, reports, shared docs with clients. |
-| [Slack MCP](https://modelcontextprotocol.io/integrations/slack) | Read/send Slack messages | Client comms, team notifications, alert routing. |
-| [GitHub MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/github) | GitHub issues, PRs, repos | Track bugs, manage projects, code review. |
-| [Firecrawl MCP](https://github.com/mendableai/firecrawl-mcp-server) | Web scraping + crawling | Prospect research, competitor monitoring, content extraction. |
-| [Brave Search MCP](https://github.com/nicholasgriffintn/brave-search-mcp) | Web search via Brave API | Free tier available. Good for prospect research. |
 
-To add an MCP server, edit `.mcp.json` in your project root (see `examples/.mcp.json` for the format).
+Everything else you need is a CLI, not an MCP. CLIs are more reliable, easier to debug, and don't pollute your context. See below.
+
+To add Context7, edit `.mcp.json` in your project root (see `examples/.mcp.json` for the format).
+
+### GTM CLIs We Built
+
+These are CLIs -- not MCPs. Run them from the terminal, pipe output into Claude, no wiring required.
+
+| Repo | What | Why |
+|------|------|-----|
+| [AI Ark CLI](https://github.com/LeadGrowGTM/ai-ark-cli) | Free tech stack detection + enrichment | Detect what tech a prospect uses. Zero cost, no API key. Runs locally. |
+| [Disco-like CLI](https://github.com/LeadGrowGTM/disco-like-cli) | ICP-driven prospect discovery | Find lookalike companies from your best clients. Outputs lead lists, not dashboards. |
+
+### GitHub CLI
+
+Install once, use everywhere. Claude Code can call `gh` directly to manage repos, PRs, issues, and releases -- no browser required.
+
+```bash
+# Windows (WinGet)
+winget install --id GitHub.cli
+
+# macOS
+brew install gh
+
+# Linux
+sudo apt install gh   # Debian/Ubuntu
+sudo dnf install gh   # Fedora
+
+# Authenticate
+gh auth login
+
+# Verify
+gh auth status
+```
+
+Common commands Claude uses via `gh`:
+
+```bash
+gh repo clone owner/repo                       # clone a repo
+gh pr create --title "..." --body "..."        # open a PR
+gh pr list                                     # see open PRs
+gh issue list                                  # see open issues
+gh issue create --title "..." --body "..."
+gh repo view --web                             # open repo in browser
+gh api repos/owner/repo/...                    # raw API calls
+```
+
+Add to your `settings.json` allowlist so Claude doesn't prompt on every call:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh *)"
+    ]
+  }
+}
+```
 
 ### Automation Platforms (Where Does It Run?)
 
@@ -121,9 +174,8 @@ Use these CLIs so Claude Code can manage your automation platforms directly from
 
 | Tool | What | Role in Waterfall |
 |------|------|-------------------|
-| [Clay](https://clay.com) | Data enrichment platform | Tier 2 — paid lookups, 80+ data providers |
-| [Apollo](https://apollo.io) | Contact database + enrichment | Tier 1-2 — email finding, company data |
-| [Icypeas](https://icypeas.com) | Email finder + verifier | Tier 2 — per-lookup email validation |
+| [Clay](https://clay.com) | Data enrichment platform | Tier 2 -- paid lookups, 80+ data providers |
+| [Icypeas](https://icypeas.com) | Email finder + verifier | Tier 2 -- per-lookup email validation |
 
 ### Email Senders
 
@@ -152,13 +204,66 @@ Add allowlists in `.claude/settings.json` for read-only commands. Stop approving
 Context compresses mid-session. You lose memory. Commit often. Git history IS your handoff doc. Don't rely on conversation memory.
 
 ### Spawn, Don't Read
-Don't read 10 files in main context. Spawn an agent — it reads them, you get a 200-token summary. Protects your context window.
+Don't read 10 files in main context. Spawn an agent -- it reads them, you get a 200-token summary. Protects your context window.
 
 ### Caveman Mode
 Type `/caveman`. Cuts conversation tokens ~75%. Same technical substance, zero filler.
 
 ### Rules Are Modular
 Each file in `.claude/rules/` loads separately. Don't cram everything into CLAUDE.md. Split by domain. Load on demand.
+
+### Mario Audio Hook (Task Complete Alert)
+Wire a hook so Claude plays an 8-bit sound when it finishes a task. Never miss a completion while you're tabbed away.
+
+**Windows (PowerShell beeps -- no install required):**
+
+```json
+// .claude/settings.json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -c \"[console]::beep(523,100);[console]::beep(659,100);[console]::beep(784,150)\""
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**macOS/Linux (requires `sox` -- `brew install sox` or `apt install sox`):**
+
+Create `~/.claude/hooks/done.sh`:
+
+```bash
+#!/bin/bash
+play -n -c1 synth 0.1 sine 523 : synth 0.1 sine 659 : synth 0.15 sine 784 2>/dev/null
+```
+
+Then in `.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/done.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
 
 ## Course Slides
 
@@ -168,4 +273,4 @@ View the full 44-slide deck: **[claude-code-course-kappa.vercel.app](https://cla
 
 We build GTM systems that book meetings on autopilot. The course teaches our method.
 
-**[leadgrow.ai](https://www.leadgrow.ai)** — Want us to build this for you?
+**[leadgrow.ai](https://www.leadgrow.ai)** -- Want us to build this for you?
