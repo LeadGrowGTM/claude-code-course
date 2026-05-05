@@ -5,7 +5,7 @@ Score each dimension X/10. Produce an overall score at the end.
 
 ---
 
-### Gap Opening
+### Gap Opening (CLOSER)
 
 **Hormozi (original):** The CLOSER framework's Clarify step — "Before I tell you anything about what we do, can I ask you a few questions?" Opening with permission. The gap question creates space: "What made you take this call today?" or "What's going on in your business that made you want to look at outbound?" Let them say the problem. If you fill the gap yourself, you've closed it.
 
@@ -17,7 +17,7 @@ Score each dimension X/10. Produce an overall score at the end.
 
 ---
 
-### Pain Surfacing
+### Pain Surfacing (Peel the Onion)
 
 **Hormozi (original):** Pain is the Pitch. "What's that costing you?" / "How long has that been going on?" / "What have you tried?" The goal is the root-cause pain, not surface symptoms. First answer is always the polished one. Real pain is three layers down. Keep peeling: "And what happens because of that?" The pitch is not the product — the pitch is the articulated pain.
 
@@ -41,7 +41,7 @@ Score each dimension X/10. Produce an overall score at the end.
 
 ---
 
-### Qualification
+### Qualification (Gap Framework)
 
 **Hormozi (original):** You are not selling to everyone. Qualification is respect for your own time and the prospect's. "Do you have budget set aside for something like this?" / "Are you the person who'd make this call, or would others be involved?" / "How soon are you looking to move on this?" Unqualified prospects waste everyone's time. Better to disqualify fast than to chase for months.
 
@@ -53,7 +53,7 @@ Score each dimension X/10. Produce an overall score at the end.
 
 ---
 
-### Talk Ratio
+### Talk Ratio (Listen 2:1)
 
 **Hormozi (original):** The rule is simple: the prospect should talk twice as much as you. If you're talking more than 33% of the time on a discovery call, you are pitching — not discovering. Silence is your friend. Let them fill it. Every minute they talk is a minute they're selling themselves. The rep's job is to ask questions and listen, not to demonstrate knowledge.
 
