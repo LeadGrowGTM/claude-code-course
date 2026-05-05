@@ -1,0 +1,2 @@
+# Ignore SQLite database (runtime-generated)
+*.db

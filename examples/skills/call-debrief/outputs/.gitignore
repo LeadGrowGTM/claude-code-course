@@ -1,0 +1,4 @@
+# Ignore generated reports (real call data)
+*.md
+# Keep demo artifact
+!demo-anonymized-*.md
