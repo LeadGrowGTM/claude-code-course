@@ -22,6 +22,13 @@
 
 **Requirements:** REF-01, REF-02, REF-03, REF-04, REF-05
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Write sales-coach-discovery.md (5 Hormozi discovery frameworks)
+- [ ] 01-02-PLAN.md — Write sales-coach-demo.md (4 frameworks) + sales-coach-proposal.md (8 frameworks)
+- [ ] 01-03-PLAN.md — Write content-ideas.md + internal-team.md (extraction guidelines)
+
 **Success criteria:**
 1. `references/sales-coach-discovery.md` contains CLOSER, Gap Framework, Peel the Onion, Listen 2:1, Pain is the Pitch — each with Hormozi original / B2B equivalent / anti-pattern / coaching prompt
 2. `references/sales-coach-demo.md` and `references/sales-coach-proposal.md` follow identical structure with their respective frameworks
