@@ -1,66 +1,108 @@
-# Sales Coach — Proposal Call Reference
+# Sales Coach Reference: Proposal Calls
 
-Loaded by the Sales Coach vector when `call_type = sales/proposal`.
-Score each dimension X/10. Produce an overall score at the end.
+Use this file when scoring proposal call dimensions. Each framework maps to one scored dimension (X/10) in the coaching report.
 
-Note: Prior discovery gaps are surfaced from calls.db and referenced as "carried forward" — do not re-flag them as new issues.
+Scoring dimensions:
+- Conviction check (3 Conviction Questions)
+- Objection handling (AAA)
+- Close mechanics (Shut Up When They Say Yes)
+- Price framing
+- Momentum (Reason Reversal / Getting Closer)
 
----
-
-### Conviction Check
-
-**Hormozi (original):** Never present price to someone who isn't convinced. The three conviction questions before price: "Do you believe this will work for you?" / "Do you believe we can deliver it?" / "Is there anything preventing you from moving forward today — other than price?" If you can't get yes on all three, presenting the number is premature. The close happens before the close.
-
-**B2B equivalent:** Before presenting the retainer price: "Based on what we've walked through — do you see how this would solve the pipeline problem you described?" → "Do you have confidence we can execute this for your business specifically?" → "Setting aside budget for a moment — is there anything else that would stop you from moving forward?" Only after three yeses does the price come out.
-
-**Anti-pattern:** Moving straight from demo to price without conviction check. Presenting price to someone who still has unresolved skepticism about fit or execution. The objection that follows is almost always a displaced version of the unresolved conviction question.
-
-**Coaching prompt:** "Did the rep ask the three conviction questions (or equivalents) before presenting price? Were the answers genuinely affirmative, or did the rep accept vague positivity and move on? If conviction wasn't checked, note it — proposal objections are often displaced conviction gaps."
+Additional frameworks: Rocking Chair, 1-10 Scale close, Best/Worst case
 
 ---
 
-### Objection Handling
+### 3 Conviction Questions
 
-**Hormozi (original):** Never deflect or fight an objection. AAA: Acknowledge — "I completely understand." Associate — "Most of our clients said the same thing before they started." Ask — "What specifically is driving that concern?" The third step is the critical one. The stated objection is almost never the real objection. You have to ask to get to it. Fighting the surface objection is wasted energy.
+**Hormozi (original):** Q1: "So we've talked about [the problem] — does this feel like the right problem to solve right now?" (let them say yes) Q2: "And based on what you've seen today, does this look like it would solve it for you?" (let them say yes) Q3: "And do you feel like we're the right people to help you do that?" (let them say yes). Only then: "Great — let me walk you through what that looks like."
 
-**B2B equivalent:** Prospect says "It feels expensive." Acknowledge: "I hear you — it's a real investment." Associate: "Most founders we work with said the same thing before we started — they were comparing it to what they'd spent on tools or SDRs that didn't convert." Ask: "What's driving the concern specifically — is it the monthly commitment, or the total contract, or something about the timing relative to your current budget?" Then shut up and listen.
+**B2B equivalent:** Q1: "From what you've told me — the pipeline unpredictability, the 2 meetings a month — does solving that feel like the right priority right now?" Q2: "Based on how we've walked through the system today, does this look like it would close that gap for you?" Q3: "And do you feel like the LeadGrow team is the right fit to execute this for you?" Three yeses before price. No shortcuts.
 
-**Anti-pattern:** Defending the price immediately. "Well, if you consider what you'd spend on a full-time SDR..." — that's fighting, not asking. Or acknowledging without asking: "I understand, lots of people feel that way" and then re-pitching. The ask is what reveals the real objection.
+**Anti-pattern:** Jumping from demo to pricing deck without conviction check. Prospect hasn't confirmed problem-fit-trust. Every objection at price is really an unconvinced conviction — and you can't handle price objections if you skipped the conviction layer.
 
-**Coaching prompt:** "When an objection arose, did the rep acknowledge, associate, and ask — in that order? Did they reach the real underlying objection, or did they handle the surface version? Identify each objection in the transcript and score the AAA execution."
-
----
-
-### Close Mechanics
-
-**Hormozi (original):** Shut Up When They Say Yes. Ask for the close once, clearly: "Based on everything we've covered, does this make sense to move forward?" Then stop talking. Do not fill the silence. The next person who speaks after the close question is committed — make sure it's them. Talking after asking for the close is the single most common way reps lose deals that are already won.
-
-**B2B equivalent:** "Based on everything we've gone through today, are you ready to get started?" Then silence. If they say yes — stop talking and move to logistics. Don't add "And of course we'll make sure..." Don't celebrate verbally. Don't pitch again. Move to next steps.
-
-**Anti-pattern:** Asking for the close and then immediately softening it: "...or we could do a trial run, or think about it more, whatever works for you." The rep saves the prospect from having to decide. Silence anxiety kills closed deals.
-
-**Coaching prompt:** "Did the rep ask for the close explicitly and then stop talking? How long was the silence after the close question? Did the rep break the silence before the prospect answered — if so, what did they say?"
+**Coaching prompt:** Did the rep ask all 3 conviction questions and get explicit confirmations before presenting price? Did each question get a genuine yes (not a "yeah sure" brush-off)? Did the rep slow down to let answers land?
 
 ---
 
-### Price Framing
+### AAA Objection Handling (Acknowledge-Associate-Ask)
 
-**Hormozi (original):** Anchor the value before the number. Present the premium option first. Always offer prepayment before payment plan. "We could do $X all in, or if you'd prefer to spread it, it's $Y/month." The monthly number feels smaller when the annual has already been said. The buyer is now choosing between payment structures, not between buying and not buying.
+**Hormozi (original):** Prospect: "It's a lot of money." Rep: "I get it — it IS a significant investment." (acknowledge — don't say "but") "Most of our clients felt the same way before they started." (associate — they're not alone) "What specifically makes you hesitant — is it the amount, or is it the certainty that it'll work?" (ask — surface the real objection under the stated one)
 
-**B2B equivalent:** Lead with value anchor: "Most companies at your stage spend $8–15k/month between SDR salaries, tools, and management overhead — and still don't get consistent pipeline." Then: "Our full retainer is $X/month on a 6-month agreement, or we can do a prepayment at $Y which saves you $Z." Prepay first, monthly second. Anchor high before presenting the actual number.
+**B2B equivalent:** Prospect: "We tried outbound before and it didn't work." Rep: "That's fair — and honestly, most founders we talk to have that exact experience with agencies." (acknowledge + associate) "What didn't work — was it the targeting, the copy, or the consistency of execution?" (ask to isolate the real objection) Now you have a specific problem to solve, not a blanket "it doesn't work."
 
-**Anti-pattern:** Leading with the monthly number without any value anchor. Or presenting monthly first and then the annual as an upsell. The sequence matters — anchor → prepay → monthly. Reversing it trains the buyer to compare on price, not value.
+**Anti-pattern:** Defensive pivot — "Well actually our approach is different because..." This signals you didn't really hear them. Prospect doubles down. You're in an argument.
 
-**Coaching prompt:** "Did the rep anchor value before presenting the number? Was prepayment presented before the monthly option? What was the anchor used — was it competitive spend, opportunity cost, or another frame?"
+**Coaching prompt:** When an objection arose, did the rep acknowledge it without immediately defending? Did they associate (normalize it)? Did they ask a question that isolated the specific concern underneath the stated objection?
 
 ---
 
-### Momentum
+### Rocking Chair Close
 
-**Hormozi (original):** When the prospect stalls — "I need to think about it" — don't accept it. Two tools: Reason Reversal: "Of course. What I'd like to understand is — what would need to be true for you to say yes?" Gets them to define their own close criteria. Getting Closer: "If I could [address the concern], would you be comfortable moving forward?" Conditional yes tests genuine intent vs. stall. If they can't define what would make them say yes, they were never going to say yes.
+**Hormozi (original):** "Picture yourself in a rocking chair at 70, looking back on this decision. In one version, you said yes, built the system, hit your revenue goals. In the other version, you said 'let me think about it,' went back to the same thing that hasn't been working, and that $X/month you didn't spend is worth $0 in pipeline. Which version do you want to be in?"
 
-**B2B equivalent:** Prospect: "I want to think about it over the weekend." Rep: "Absolutely — I just want to make sure I understand what you're thinking through. Is it the investment level, the timing, or something about fit?" (Reason Reversal.) Or: "If I could put together a 30-day pilot scope at a lower entry point, would that make it easier to pull the trigger?" (Getting Closer.) Use one, not both — picking the tool based on what the actual stall is.
+**B2B equivalent:** "I'll make this concrete: if you don't fix the pipeline problem in the next 6 months — same 2 meetings a month, same close rate — you're looking at another quarter under target. That's probably $150-200k in missed revenue. The cost of the program is $18k. The real question is whether the risk of staying the same is higher than the risk of changing." Let them sit with that. Don't fill the silence.
 
-**Anti-pattern:** Accepting "I'll think about it" and scheduling a follow-up. The deal dies in the follow-up queue. Every stall needs a Reason Reversal or Getting Closer in the moment. Sending a follow-up email instead of handling momentum in the call is the most expensive mistake in B2B sales.
+**Anti-pattern:** Soft-pedaling the cost of inaction. "Well, you could always try it later." This removes urgency. The prospect has no reason to decide today.
 
-**Coaching prompt:** "Did the prospect stall at any point — 'think about it,' 'talk to my partner,' 'need more time'? If yes, did the rep use Reason Reversal or Getting Closer to handle it in the moment? Or did they accept the stall and schedule a follow-up?"
+**Coaching prompt:** Did the rep explicitly articulate the cost of inaction in the prospect's own terms (revenue, deals, time)? Did they contrast it against the investment with specificity? Did they hold silence after making the comparison?
+
+---
+
+### Reason Reversal
+
+**Hormozi (original):** Prospect: "I need to think about it." Rep: "Of course — what would make this a yes today?" (pause) If they give a reason: "If I could [address that reason], is there any other reason we couldn't get started?" Keep narrowing until there's one real objection or a clear yes.
+
+**B2B equivalent:** Prospect: "We need to talk internally and get back to you." Rep: "Totally understand. Help me figure out where we are — if the internal conversation goes well, what would have to be true for this to move forward?" Surface the actual decision criteria. Then: "And if I could show you that, is there anything else that would be a blocker?" You're not pressuring — you're diagnosing.
+
+**Anti-pattern:** Accepting "I'll think about it" as a final answer and scheduling a "follow-up call" with no agenda. This is a polite no with a meeting attached. Deal goes cold.
+
+**Coaching prompt:** When the prospect deferred, did the rep ask what it would take to decide today? Did they narrow to one specific concern? Did they address it and re-ask for the close?
+
+---
+
+### 1-10 Scale Close
+
+**Hormozi (original):** "On a scale of 1-10 — 10 being ready to sign today, 1 being not at all — where are you right now?" If they say 7: "What would make it an 8 or 9 for you?" Whatever they say IS the objection you need to handle. It's never "I'd give it a 10 if [impossible thing]" — it's almost always a specific, solvable concern.
+
+**B2B equivalent:** "I want to get a read on where you are. 1-10, 10 is we get started this week, 1 is you're not interested at all — where does this land for you right now?" If 7: "What's the 2-3 points that would make it a 9 for you?" This turns a vague feeling into a specific gap you can address before the call ends.
+
+**Anti-pattern:** Ending the call with "sounds like there's interest — I'll send over the proposal and we can reconnect." Rep has no idea where they stand. Prospect forgets by end of day.
+
+**Coaching prompt:** Did the rep ask for a 1-10 rating before ending the call? Did they ask what would move the number up for anything below 8? Did they treat the gap as a specific solvable objection?
+
+---
+
+### Best/Worst Case
+
+**Hormozi (original):** "Let's pressure-test this together. Worst case — you pay for 3 months, you get zero results, you cancel. You're out $X. Best case — you hit your pipeline goals in month 2, everything changes. Most likely case based on what we've seen with similar companies — [specific realistic outcome]. What does the worst case cost you versus what does staying the same cost you?"
+
+**B2B equivalent:** "Let me walk through the scenarios. Worst case: we start, it doesn't get traction in 3 months, you stop. You're out $9k. Best case: you hit 8+ qualified meetings a month by month 3, close 2 deals — that's $80k in new revenue against a $9k investment. Most likely: most clients in your segment see 4-6 meetings by month 2, close 1-2 by month 3. Is the worst case outcome worse than staying where you are right now?" Name the fear, bound it, compare it.
+
+**Anti-pattern:** Saying "I understand your concern about risk" without actually quantifying it. Vague reassurance does nothing. The fear stays formless and large.
+
+**Coaching prompt:** Did the rep explicitly walk through best case, worst case, and most likely case? Were the numbers specific (not ranges)? Did they compare the worst case cost to the cost of inaction?
+
+---
+
+### Shut Up When They Say Yes
+
+**Hormozi (original):** Prospect says "OK, let's do it." Rep: "Great. [Pause.] I'll send over the agreement now." That's it. Do not recap the program, add conditions, mention onboarding, or fill the silence with enthusiasm. The close is done. Move to next steps only.
+
+**B2B equivalent:** Prospect says "Yeah, I think we're ready to move forward." Rep: "Perfect. I'll send the agreement over today — you should have it within the hour." Done. Do not say "Amazing, I'm really excited to work with you, so what we'll do is..." Silence is professional. Talking is nervous.
+
+**Anti-pattern:** "That's great! So what happens next is we'll do an onboarding call, then we'll set up your ICP, then we'll do the first campaign draft, and we should have the first sends going by..." Prospect hears a lot of work. Second thoughts spike. The yes softens.
+
+**Coaching prompt:** After the prospect agreed or moved toward agreement, did the rep stop talking? Did they move immediately to next steps without re-pitching or over-explaining the process?
+
+---
+
+### Price Framing and Order
+
+**Hormozi (original):** "Before I show you the investment — we've established that a closed deal for you is worth $40k ARR. You said you're leaving 3-4 deals on the table per quarter. That's the upside we're solving for." [Pause. Let the number land.] "The full program, prepaid annually, is $X. We also have a monthly option at $Y — most clients who are confident in the outcome go annual because the math is obvious. What makes more sense for you?"
+
+**B2B equivalent:** "We said each deal is worth $40k to you and you're leaving $120k on the table per quarter. Our program is $18k for a 6-month engagement. Full prepay is $18k — saves you $X. Month-to-month is $3,500. Most founders who've done the math go prepay because a single closed deal more than covers it. How do you want to structure it?" Never lead with monthly. Annual anchors high, monthly feels like a discount.
+
+**Anti-pattern:** Leading with "so our pricing is $3,500 per month." Prospect immediately calculates total cost in their head, compares to alternatives, and anchors to the monthly burn — not the ROI. Price resistance is now the frame.
+
+**Coaching prompt:** Did the rep anchor to ROI before presenting price? Did they present the prepay option first? Did they present monthly as the "accessible" alternative, not the default? Was there a clear pause between the ROI frame and the price reveal?
