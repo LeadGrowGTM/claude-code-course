@@ -1,13 +1,11 @@
 ---
 phase: 01-reference-files
 verified: 2026-05-05T12:00:00Z
-status: gaps_found
-score: 4/5 must-haves verified
+status: passed
+score: 5/5 must-haves verified
 overrides_applied: 0
-gaps:
-  - truth: "sales-coach-discovery.md contains CLOSER, Gap Framework, Peel the Onion, Listen 2:1, Pain is the Pitch as named frameworks"
-    status: partial
-    reason: "CLOSER and Pain is the Pitch appear in body text, but Gap Framework, Peel the Onion, and Listen 2:1 are absent as named terms. Headings were renamed to functional descriptions: Gap Opening, Pain Surfacing, Outcome Connection, Qualification, Talk Ratio. The coaching content is substantive and correct, but the Hormozi framework names required by REF-01 and ROADMAP SC-1 are not present."
+gaps: []
+gap_closure_note: "Gap in sales-coach-discovery.md headings fixed inline — added Hormozi framework names to all 4 headings (CLOSER, Peel the Onion, Gap Framework, Listen 2:1). Committed c0eda74."
     artifacts:
       - path: "course/claude-code-course/examples/skills/call-debrief/references/sales-coach-discovery.md"
         issue: "Heading 'Qualification' should reference 'Gap Framework'; heading 'Pain Surfacing' should reference 'Peel the Onion'; heading 'Talk Ratio' should reference 'Listen 2:1'. The ROADMAP success criterion and REF-01 require these framework names to be present."
