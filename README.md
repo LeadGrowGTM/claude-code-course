@@ -151,6 +151,21 @@ Add to your `settings.json` allowlist so Claude doesn't prompt on every call:
 }
 ```
 
+### LG Runtime (Durable LLM Execution)
+
+If you're running LLM pipelines at volume -- enrichment waterfalls, campaign generation, multi-step research -- you need a runtime layer, not raw API calls.
+
+| Repo | What | Why |
+|------|------|-----|
+| [LG LLM Runtime](https://github.com/LeadGrowGTM/lg-llm-runtime) | Durable LLM execution layer | Campaign-level cost tracking, concurrency limits, operator identity, retry logic, and a web dashboard. Route all your LLM calls through here instead of hitting provider APIs directly. |
+
+Key features:
+- **Campaign association** -- every LLM call tagged to a client/campaign, cost tracked
+- **Concurrency control** -- rate limits enforced at runtime, not per-script
+- **Historical cost** -- full spend history per operator, per campaign
+- **Web dashboard** -- see what's running, what it costs, where it failed
+- **Retries + observability** -- durable by default, not an afterthought
+
 ### Automation Platforms (Where Does It Run?)
 
 | Tool | When to Use | Link |
