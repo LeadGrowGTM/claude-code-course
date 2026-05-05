@@ -1,57 +1,52 @@
-# Sales Coach Reference: Demo Calls
+# Sales Coach — Demo Call Reference
 
-Use this file when scoring demo call dimensions. Each framework maps to one scored dimension (X/10) in the coaching report.
-
-Scoring dimensions:
-- Proof-Promise-Plan opener
-- Pain anchoring
-- Three-Pillar framing
-- Engagement ratio
+Loaded by the Sales Coach vector when `call_type = sales/demo`.
+Score each dimension X/10. Produce an overall score at the end.
 
 ---
 
-### Proof-Promise-Plan
+### Proof-Promise-Plan Opener
 
-**Hormozi (original):** "We've helped companies like yours add $X in pipeline in Y months. Today I'm going to show you exactly how that works for your situation — and by the end you'll know whether this makes sense for you or not. That's it. Sound good?" (Three beats. No filler.)
+**Hormozi (original):** The first 20 seconds set the frame. Proof: "We've done this for [social proof]." Promise: "By the end of this call, you'll see exactly how [outcome]." Plan: "Here's what we're going to cover." Without this frame, the prospect doesn't know what success looks like — they're watching a presentation instead of evaluating a solution.
 
-**B2B equivalent:** "We've gotten companies at your stage [similar founder context] 8-12 qualified meetings a month. Today I'm going to show you exactly how our system works for your ICP — infrastructure, copywriting, execution. By the end you'll know if this is worth a second conversation. Cool?" Proof establishes stake, Promise sets the bar, Plan removes uncertainty about the session.
+**B2B equivalent:** "We've set up outbound systems for 30+ B2B SaaS companies at your stage. By the end of this call, you'll see exactly how we'd build your outreach engine, sharpen your offer, and get you in front of right-fit accounts. I'll walk through how it works, then we'll look at how it maps to your situation — does that work?" Said in the first 20–30 seconds.
 
-**Anti-pattern:** Opening with "So let me share my screen and walk you through what we do..." — no proof, no promise, no plan. Prospect goes into passive mode and evaluates features like a product reviewer, not a buyer.
+**Anti-pattern:** Starting with "So, let me show you what we do..." or jumping straight into the workflow without setting expectations. The prospect doesn't know what to evaluate, so they default to price.
 
-**Coaching prompt:** Did the rep open with a concrete result (Proof), a specific outcome for today (Promise), and a clear agenda (Plan) — all in the first 60-90 seconds? Or did they drift into feature walkthrough without setting the frame?
+**Coaching prompt:** "Did the rep open with Proof-Promise-Plan in the first 20–30 seconds? Can you identify each of the three elements in the transcript? If not, what was missing?"
 
 ---
 
 ### Pain Anchoring
 
-**Hormozi (original):** Before showing any capability: "Remember you said [specific pain they mentioned]? Watch what happens here." Then demonstrate. Then: "Does that solve the [specific pain]?" Get confirmation before moving on.
+**Hormozi (original):** Every section of the demo is anchored back to what they said they needed. "You mentioned that [pain] — this is how we address exactly that." The generic walkthrough is the enemy. Features without a pain connection are just noise. The demo is not a tour; it's a map from their pain to the outcome.
 
-**B2B equivalent:** Before showing the prospecting infrastructure: "You mentioned your reps are spending 3 hours a day manually finding contacts. Here's how we eliminate that." Before showing copy: "You said your open rates are below 30% — this is the framework we use to fix that." Each feature anchored to their words, not generic talking points.
+**B2B equivalent:** If the prospect said in discovery that their biggest issue is poor targeting (they're reaching the wrong accounts), the demo leads with targeting: "You mentioned that a lot of your current outreach is hitting companies that aren't a fit — let me show you how we build the ICP filter..." Not starting with infrastructure or pricing.
 
-**Anti-pattern:** Giving a feature tour disconnected from the prospect's stated pain. "And here's our sequence builder — it supports multi-step personalization at scale." The prospect doesn't know why they should care.
+**Anti-pattern:** Running the same demo script regardless of what the prospect said in discovery. Covering all three pillars in the same order every time. The prospect senses the template and disengages.
 
-**Coaching prompt:** For each major capability shown in the demo, was it explicitly introduced with a callback to the prospect's stated pain from discovery? Did the prospect confirm each anchor before the rep moved on?
+**Coaching prompt:** "Did the rep reference specific things the prospect said in discovery (or at the start of this call) before moving into any section of the demo? Was the demo sequence shaped by the prospect's stated pain?"
 
 ---
 
 ### Three-Pillar Framing
 
-**Hormozi (original):** "What we've built has three components that only work together: [Pillar 1] handles X, [Pillar 2] handles Y, and [Pillar 3] handles Z. Most companies try to piece these together from three vendors. We built it as one system because if any part is missing, the whole thing breaks." Then demo each pillar in order, looping back to the system view.
+**Hormozi (original):** When selling a complex service, you need a simple mental model the prospect can hold. Three components, named, shown as a system. Not features — a framework. The prospect should leave knowing the three things and how they connect. Unnamed services feel like custom work; named systems feel like a proven product.
 
-**B2B equivalent:** "The LeadGrow system has three components: infrastructure (data + targeting), execution (copywriting + sequencing), and optimization (coaching + iteration). Every agency sells copywriting. Most can do targeting. No one else does all three as a managed system where the pieces reinforce each other." Then show each pillar, connect back to the system frame.
+**B2B equivalent:** "LeadGrow runs on three components: the outreach engine — we handle infrastructure, warmup, and deliverability so you land in the inbox. The offer — we sharpen your positioning so every email speaks to a real pain. The targeting — we build the ICP filter and source the right accounts. The reason these work as a system is that most companies only fix one or two of these. We run all three." Present them as a connected system, not three independent features.
 
-**Anti-pattern:** Walking through features in slide order without establishing the system metaphor. Prospect sees "nice features" not a machine. Price resistance spikes because they can compare individual pieces against cheaper alternatives.
+**Anti-pattern:** Walking through each component without naming the system or explaining how they connect. Or introducing a fourth or fifth component that muddies the frame. Three is the number — no more, no fewer.
 
-**Coaching prompt:** Did the rep establish the three-pillar system frame before walking through individual capabilities? Did each pillar's demo loop back to the integrated system view? Did the prospect understand how the pillars depend on each other?
+**Coaching prompt:** "Did the rep name all three pillars explicitly — outreach engine, offer, targeting? Were they presented as a system, or as separate services? Did the prospect demonstrate understanding of the framework (e.g., asking questions about a specific pillar)?"
 
 ---
 
-### Engagement Ratio
+### Engagement
 
-**Hormozi (original):** "I want to pause here — given what you told me about your pipeline situation, does this match what you were hoping to see?" or "Before I move on — where does this land for you? Does this feel like it addresses the [specific pain] or is there a piece I'm missing?" Real questions that surface objections early.
+**Hormozi (original):** A presentation is not a demo. In a real demo, the prospect is answering questions throughout. "Does this make sense for what you described?" / "Which of these is most relevant to where you are?" / "What questions do you have before I move on?" If the prospect hasn't spoken in five minutes, you've lost them.
 
-**B2B equivalent:** After showing the targeting infrastructure: "You mentioned your ICP is founder-led SaaS with headcount 20-200. Is this how you're thinking about your segment, or are there filters we're not accounting for?" After showing copy: "Does this voice feel right for your buyers, or is there a register that would land better?" Objections surfaced in the demo are much easier to handle than objections at close.
+**B2B equivalent:** Pause after each pillar. "Does that address what you mentioned about [their pain]?" Check in before moving to the next section. Ask: "Which of these three feels like the biggest gap for you right now?" Use their answer to weight the rest of the demo.
 
-**Anti-pattern:** Running a 25-minute presentation with one "any questions?" at the end. Prospect has been passively evaluating for 25 minutes, objections have calcified, and the rep has no read on where they stand.
+**Anti-pattern:** Presenting all three pillars as a monologue and then asking "Any questions?" at the end. The prospect mentally checked out after minute eight and their "no questions" means disengagement, not satisfaction.
 
-**Coaching prompt:** Did the rep insert engagement questions every 3-5 minutes? Were the questions open-ended and tied to the prospect's specific situation? Did any questions surface objections that were then handled inline?
+**Coaching prompt:** "How many times did the prospect speak during the demo portion of the call? Did the rep ask engagement questions between sections? Was the demo interactive or presentational?"
