@@ -34,15 +34,17 @@ Threshold for inclusion: If someone said "we'll do X" or "let's go with Y" and n
 
 ## Action Items
 
-List every specific task that someone committed to. If it wasn't assigned to a person with at least an implied timeframe — it's not an action item.
+List every specific action item that someone committed to on the call. If it wasn't assigned to a person with at least an implied timeframe — it's not an action item, it's a blocker or a discussion point.
+
+**Hard rule: no orphaned action items.** Every action item must have an owner. Every action item must have a deadline or be explicitly flagged as UNCONFIRMED.
 
 Format:
 
 - **Task:** [specific action, stated as a verb phrase]
 - **Owner:** [name or role]
-- **Deadline:** [explicit date if stated, or "before next call" / "this week" if implied — never "TBD"]
+- **Deadline:** [explicit date if stated, or "before next call" / "this week" if implied — never blank]
 
-If a task has no owner or no deadline, flag it:
+If an action item has no clear owner, flag it as UNASSIGNED rather than omitting it — unowned action items are high-risk:
 
 - **Task:** [action]
 - **Owner:** UNASSIGNED — flag for Mitch

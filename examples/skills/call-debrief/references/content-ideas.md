@@ -32,7 +32,7 @@ Avoid:
 
 ## Content Angles
 
-Extract 3–5 angles that could become LinkedIn posts, newsletter sections, or content atoms.
+Extract 3–5 content angles that could become LinkedIn posts, newsletter sections, or content atoms.
 
 For each angle, provide:
 
