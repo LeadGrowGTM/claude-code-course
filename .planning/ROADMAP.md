@@ -96,6 +96,11 @@ Plans:
 - Classification logic in SKILL.md workflow section
 - Company extraction + web search wired into skill flow
 
+**Plans:** 1 plan
+
+Plans:
+- [ ] 03-01-PLAN.md — SKILL.md classify segment + company context (Checkpoints 3, 4) + prior-call lookup
+
 ---
 
 ## Phase 4: Processing Vectors
