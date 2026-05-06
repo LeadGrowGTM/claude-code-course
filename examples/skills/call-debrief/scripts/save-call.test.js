@@ -67,4 +67,47 @@ describe('updateCallGaps', () => {
 
     expect(row.gaps_json).toBe(second);
   });
+
+  it('throws when transcript_id does not exist', async () => {
+    const { updateCallGaps } = await import('./save-call.js');
+    expect(() => updateCallGaps({ transcript_id: 'nonexistent-id-xyz', gaps_json: '[]' })).toThrow(
+      'No row found for transcript_id: nonexistent-id-xyz',
+    );
+  });
+});
+
+describe('saveCall', () => {
+  const TEST_ID = 'test-save-001';
+
+  afterEach(() => deleteCall(TEST_ID));
+
+  it('inserts a new row with gaps_json and findings_json as null', async () => {
+    const { saveCall } = await import('./save-call.js');
+    saveCall({ transcript_id: TEST_ID, company_domain: 'acme.com', call_type: 'discovery', call_date: '2026-02-01' });
+
+    const db = new Database(dbPath);
+    const row = db.query('SELECT * FROM calls WHERE transcript_id = ?').get(TEST_ID);
+    db.close();
+
+    expect(row).toBeTruthy();
+    expect(row.transcript_id).toBe(TEST_ID);
+    expect(row.company_domain).toBe('acme.com');
+    expect(row.call_type).toBe('discovery');
+    expect(row.call_date).toBe('2026-02-01');
+    expect(row.gaps_json).toBeNull();
+    expect(row.findings_json).toBeNull();
+  });
+
+  it('is idempotent — second call with same transcript_id replaces without error', async () => {
+    const { saveCall } = await import('./save-call.js');
+    saveCall({ transcript_id: TEST_ID, company_domain: 'acme.com', call_type: 'discovery', call_date: '2026-02-01' });
+    saveCall({ transcript_id: TEST_ID, company_domain: 'acme2.com', call_type: 'demo', call_date: '2026-02-02' });
+
+    const db = new Database(dbPath);
+    const rows = db.query('SELECT * FROM calls WHERE transcript_id = ?').all(TEST_ID);
+    db.close();
+
+    expect(rows.length).toBe(1);
+    expect(rows[0].company_domain).toBe('acme2.com');
+  });
 });
