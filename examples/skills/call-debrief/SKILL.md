@@ -211,12 +211,254 @@ Announce: "Classification complete: {type}/{sub_type}, company: {domain}. Ready 
 
 ## Phase 5: Processing Vectors
 
-_(Planned — not yet implemented)_
+### Step 1 — Re-fetch Full Transcript
 
-Route based on `callContext.type`:
-- `"sales"` → Sales Coach vector (reads `sub_type`, `web_overview`, `reddit_threads`, `prior_calls`)
-- `"internal"` → Internal Team vector
-- All types → Content Ideas vector always runs
+```javascript
+const proc = Bun.spawn(['bun', 'scripts/fetch-transcript.js', 'full', callContext.transcript_id], {
+  stderr: 'inherit',
+});
+const transcriptText = await proc.stdout.text();
+await proc.exited;
+// transcriptText: plain text, full call transcript
+```
+
+### Step 2 — Content Ideas Vector (always runs)
+
+Read the content-ideas extraction guidelines from `references/content-ideas.md`. Then call the LLM inline:
+
+```
+You are extracting content value from a business call transcript for Mitchell Keller, founder of LeadGrow.
+
+Transcript:
+{transcriptText}
+
+Extract content that meets the criteria in the guidelines below.
+
+Guidelines:
+{content-ideas.md full text}
+
+Respond with valid JSON only.
+
+Schema:
+{
+  "quotes": [
+    { "quote": "exact verbatim text", "speaker": "name or role", "context": "one sentence", "content_potential": "why usable" }
+  ],
+  "angles": [
+    { "hook": "first line of post", "format": "hot-take|process-reveal|client-success|quick-tip|live-dispatch", "core_idea": "2-3 sentences", "source_moment": "which part of call" }
+  ]
+}
+
+Rules:
+- quotes: 3-5 entries; verbatim only, no paraphrasing; must stand alone without call context
+- angles: 3-5 entries; no confidential prospect details; no generic outbound advice anyone could write
+- If transcript has fewer than 3 quotable moments meeting all criteria, include the best available and note the count
+```
+
+Parse JSON response as `contentIdeasRaw = { quotes, angles }`.
+Wrap in try/catch — if JSON.parse fails, set `contentIdeasRaw = { quotes: [], angles: [] }`.
+
+Render `contentIdeasOutput` as markdown:
+
+```
+## Content Ideas
+
+### Quotable Moments
+[for each quote: **Quote:** "..." / **Speaker:** ... / **Context:** ... / **Content potential:** ...]
+
+### Content Angles
+[for each angle: **Hook:** ... / **Format:** ... / **Core idea:** ... / **Source moment:** ...]
+```
+
+### Step 3 — Internal Team Vector (runs when `callContext.type === "internal"`)
+
+If `callContext.type !== "internal"`: set `internalTeamOutput = null` and skip to Step 4.
+
+Read the internal-team extraction guidelines from `references/internal-team.md`. Then call the LLM inline:
+
+```
+You are extracting structured meeting intelligence from an internal business call.
+
+Transcript:
+{transcriptText}
+
+Participants: {callContext.participants.join(', ')}
+Date: {callContext.date}
+
+Extract meeting intelligence following these guidelines:
+{internal-team.md full text}
+
+Respond with valid JSON only.
+
+Schema:
+{
+  "summary": "3-5 sentence prose paragraph",
+  "decisions": [
+    { "decision": "what was decided", "owner": "who is responsible", "context": "why decided" }
+  ],
+  "action_items": [
+    { "task": "verb phrase", "owner": "name or role or UNASSIGNED", "deadline": "explicit date or implied timeframe or UNCONFIRMED" }
+  ],
+  "blockers": [
+    { "blocker": "what is blocked", "blocking_on": "what needs to happen", "owner": "who resolves or unknown" }
+  ]
+}
+
+Rules:
+- decisions: only finalized commitments, not discussions; if none, return empty array
+- action_items: every item must have owner; use UNASSIGNED if unclear; deadline must never be blank — use UNCONFIRMED if unknown
+- blockers: unresolved dependencies, missing info, external waits; if none, return empty array
+```
+
+Parse JSON response as `internalTeamRaw = { summary, decisions, action_items, blockers }`.
+Wrap in try/catch — if JSON.parse fails, set `internalTeamRaw = { summary: "", decisions: [], action_items: [], blockers: [] }`.
+
+Render `internalTeamOutput` as markdown:
+
+```
+## Internal Team Report
+
+{summary paragraph}
+
+### Decisions Made
+[for each decision: **Decision:** ... / **Owner:** ... / **Context:** ...]
+[if empty: "No decisions made in this call."]
+
+### Action Items
+[for each item: **Task:** ... / **Owner:** ... / **Deadline:** ...]
+
+### Open Blockers
+[for each blocker: **Blocker:** ... / **Blocking on:** ... / **Owner:** ...]
+[if empty: "No blockers identified."]
+```
+
+### Step 4 — Sales Coach Vector (runs when `callContext.type === "sales"`)
+
+If `callContext.type !== "sales"`: set `salesCoachOutput = null` and skip to Step 8.
+
+Select reference file by `callContext.sub_type`:
+
+- `"discovery"` → read `references/sales-coach-discovery.md` (5 dimensions: Gap Opening, Pain Surfacing, Outcome Connection, Qualification, Talk Ratio)
+- `"demo"` → read `references/sales-coach-demo.md` (4 dimensions: Proof-Promise-Plan Opener, Pain Anchoring, Three-Pillar Framing, Engagement)
+- `"proposal"` → read `references/sales-coach-proposal.md` (5 dimensions: 3 Conviction Questions, AAA Objection Handling, Rocking Chair Close, Reason Reversal, Price Framing and Order)
+
+Store reference file contents as `coachRef`. The executor (Claude) reads this file from session context — it is loaded via the `@` reference in this plan's `<context>` block, not via `Bun.file()` at runtime. `coachRef` is a string held in the current session that Claude inlines into the LLM prompt in Step 6.
+
+### Step 5 — Sales Coach: Carried Forward Section (proposal path only)
+
+If `callContext.sub_type === "proposal"` and `callContext.prior_calls` contains entries with non-null `gaps_json`:
+
+Collect gaps from prior calls:
+
+```javascript
+const priorGaps = callContext.prior_calls
+  .filter((c) => c.gaps_json)
+  .map((c) => ({ call_type: c.call_type, call_date: c.call_date, gaps: JSON.parse(c.gaps_json) }));
+```
+
+Prepend this section to the Sales Coach output (before dimension scores):
+
+```
+### Carried Forward from Prior Calls
+[for each prior call with gaps: list the gaps under a subheading showing call_type + call_date]
+These gaps were identified in prior calls and are provided as context — not re-scored here.
+```
+
+If no prior calls have gaps_json: omit this section entirely.
+
+### Step 6 — Sales Coach: Score Each Dimension
+
+Call the LLM inline with the selected reference file, full transcript, and company context:
+
+```
+You are a sales coach scoring a {callContext.sub_type} call for Mitchell Keller (LeadGrow).
+
+Company: {callContext.company_name || callContext.domain || "unknown"}
+Company overview: {callContext.web_overview || "not available"}
+Reddit signals: {callContext.reddit_threads ? JSON.stringify(callContext.reddit_threads) : "not available"}
+
+Full transcript:
+{transcriptText}
+
+Score each dimension using the coaching frameworks below. For each dimension, provide specific observations from the transcript, then a score.
+
+Frameworks:
+{coachRef — full text of the selected reference file}
+
+Respond with valid JSON only.
+
+Schema:
+{
+  "dimensions": [
+    {
+      "name": "dimension name exactly as in frameworks",
+      "observations": "2-4 sentences citing specific transcript moments",
+      "score": 7
+    }
+  ],
+  "gaps": ["gap 1 as a short phrase", "gap 2", "gap 3"]
+}
+
+Rules:
+- score: integer 1-10 per dimension based on coaching prompt criteria in the frameworks
+- observations: cite specific things said (not generic commentary); reference company context where relevant
+- gaps: 2-5 short phrases naming the coaching gaps — what the rep missed or did poorly; used for future proposal cross-reference
+- Use exactly the dimension names from the frameworks — do not rename or merge dimensions
+```
+
+Parse JSON response as `coachRaw = { dimensions, gaps }`.
+Wrap in try/catch — if JSON.parse fails, set `coachRaw = { dimensions: [], gaps: [] }`.
+
+Calculate overall score:
+
+```javascript
+const overall =
+  coachRaw.dimensions.length > 0
+    ? (coachRaw.dimensions.reduce((sum, d) => sum + d.score, 0) / coachRaw.dimensions.length).toFixed(1)
+    : 'N/A';
+```
+
+Render `salesCoachOutput` as markdown (per D-05: overall score at top, each dimension scored inline after coaching notes):
+
+```
+## Sales Coach — {sub_type} Call
+**Overall: {overall}/10**
+
+[if carried forward section exists from Step 5: insert here]
+
+### {dimension.name}
+{dimension.observations}
+**Score: {dimension.score}/10**
+
+[repeat for each dimension]
+```
+
+### Step 7 — Persist Gaps to calls.db (sales path only)
+
+```javascript
+const gaps_json = JSON.stringify(coachRaw.gaps);
+const proc = Bun.spawn(['bun', 'scripts/save-call.js', '--update-gaps', callContext.transcript_id, gaps_json], {
+  stderr: 'inherit',
+});
+await proc.exited;
+// If non-zero: log warning and continue — don't abort Phase 5 for a DB write failure
+```
+
+### Step 8 — Store Outputs in Session Context
+
+```javascript
+const phaseOutputs = {
+  contentIdeasOutput, // markdown string, always present
+  internalTeamOutput, // markdown string | null
+  salesCoachOutput, // markdown string | null
+};
+```
+
+Phase 5 produces only these markdown strings. No file writes. Phase 6 assembles and saves the report.
+
+### Step 9 — Announce Completion
+
+Announce: "Processing complete. Ready for Phase 6."
 
 ---
 
