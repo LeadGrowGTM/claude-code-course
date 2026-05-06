@@ -246,13 +246,14 @@ Schema:
   ],
   "angles": [
     { "hook": "first line of post", "format": "hot-take|process-reveal|client-success|quick-tip|live-dispatch", "core_idea": "2-3 sentences", "source_moment": "which part of call" }
-  ]
+  ],
+  "note": "optional — include when fewer than 3 quotes meet criteria; describe the shortage"
 }
 
 Rules:
 - quotes: 3-5 entries; verbatim only, no paraphrasing; must stand alone without call context
 - angles: 3-5 entries; no confidential prospect details; no generic outbound advice anyone could write
-- If transcript has fewer than 3 quotable moments meeting all criteria, include the best available and note the count
+- If transcript has fewer than 3 quotable moments meeting all criteria, include the best available and set the `note` field explaining the shortage
 ```
 
 Parse JSON response as `contentIdeasRaw = { quotes, angles }`.
@@ -344,6 +345,8 @@ Select reference file by `callContext.sub_type`:
 
 Store reference file contents as `coachRef`. The executor (Claude) reads this file from session context — it is loaded via the `@` reference in this plan's `<context>` block, not via `Bun.file()` at runtime. `coachRef` is a string held in the current session that Claude inlines into the LLM prompt in Step 6.
 
+Before proceeding to Step 6, confirm `coachRef` is a non-empty string. If it is empty or undefined, halt Phase 5 with: "Coaching reference file for sub_type={sub_type} was not loaded. Reload the skill with the correct @reference." Set `salesCoachOutput = null` and skip to Step 8.
+
 ### Step 5 — Sales Coach: Carried Forward Section (proposal path only)
 
 If `callContext.sub_type === "proposal"` and `callContext.prior_calls` contains entries with non-null `gaps_json`:
@@ -353,7 +356,13 @@ Collect gaps from prior calls:
 ```javascript
 const priorGaps = callContext.prior_calls
   .filter((c) => c.gaps_json)
-  .map((c) => ({ call_type: c.call_type, call_date: c.call_date, gaps: JSON.parse(c.gaps_json) }));
+  .flatMap((c) => {
+    try {
+      return [{ call_type: c.call_type, call_date: c.call_date, gaps: JSON.parse(c.gaps_json) }];
+    } catch {
+      return [];
+    }
+  });
 ```
 
 Prepend this section to the Sales Coach output (before dimension scores):
@@ -436,7 +445,8 @@ Render `salesCoachOutput` as markdown (per D-05: overall score at top, each dime
 ### Step 7 — Persist Gaps to calls.db (sales path only)
 
 ```javascript
-const gaps_json = JSON.stringify(coachRaw.gaps);
+const safeGaps = Array.isArray(coachRaw.gaps) ? coachRaw.gaps.filter((g) => typeof g === 'string') : [];
+const gaps_json = JSON.stringify(safeGaps);
 const proc = Bun.spawn(['bun', 'scripts/save-call.js', '--update-gaps', callContext.transcript_id, gaps_json], {
   stderr: 'inherit',
 });
