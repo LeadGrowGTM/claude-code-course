@@ -14,12 +14,29 @@ export function saveCall({ transcript_id, company_domain, call_type, call_date }
   db.close();
 }
 
+export function updateCallGaps({ transcript_id, gaps_json }) {
+  const db = new Database(dbPath);
+  db.run('UPDATE calls SET gaps_json = ? WHERE transcript_id = ?', [gaps_json, transcript_id]);
+  db.close();
+}
+
 if (import.meta.main) {
-  const [transcript_id, company_domain, call_type, call_date] = process.argv.slice(2);
-  if (!transcript_id || !company_domain || !call_type || !call_date) {
-    console.error('Usage: bun scripts/save-call.js <transcript_id> <domain> <call_type> <call_date>');
-    process.exit(1);
+  if (process.argv[2] === '--update-gaps') {
+    const transcript_id = process.argv[3];
+    const gaps_json = process.argv[4];
+    if (!transcript_id || !gaps_json) {
+      console.error('Usage: bun scripts/save-call.js --update-gaps <transcript_id> <gaps_json>');
+      process.exit(1);
+    }
+    updateCallGaps({ transcript_id, gaps_json });
+    console.log(JSON.stringify({ ok: true, transcript_id }));
+  } else {
+    const [transcript_id, company_domain, call_type, call_date] = process.argv.slice(2);
+    if (!transcript_id || !company_domain || !call_type || !call_date) {
+      console.error('Usage: bun scripts/save-call.js <transcript_id> <domain> <call_type> <call_date>');
+      process.exit(1);
+    }
+    saveCall({ transcript_id, company_domain, call_type, call_date });
+    console.log(JSON.stringify({ ok: true, transcript_id }));
   }
-  saveCall({ transcript_id, company_domain, call_type, call_date });
-  console.log(JSON.stringify({ ok: true, transcript_id }));
 }
