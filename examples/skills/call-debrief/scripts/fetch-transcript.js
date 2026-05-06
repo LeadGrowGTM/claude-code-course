@@ -93,6 +93,27 @@ if (import.meta.main) {
         2,
       ),
     );
+  } else if (mode === 'full') {
+    // Full transcript mode — plain text for Tier 2 classification
+    const id = process.argv[3];
+    if (!id) {
+      console.error('Usage: bun scripts/fetch-transcript.js full <transcript_id>');
+      process.exit(1);
+    }
+    // Validate ID — same pattern as summary mode (no path traversal)
+    if (!/^[a-zA-Z0-9_\-]+$/.test(id)) {
+      console.error('Invalid transcript ID format.');
+      process.exit(1);
+    }
+    // pull_transcript.py get <id> returns formatted plain text — no --json flag
+    const proc = Bun.spawn([PYTHON, pyScript, 'get', id], { stderr: 'inherit' });
+    const text = await proc.stdout.text();
+    await proc.exited;
+    if (proc.exitCode !== 0) {
+      console.error('pull_transcript.py exited with error');
+      process.exit(1);
+    }
+    console.log(text);
   } else {
     // List mode — Checkpoint 1 feed
     const query = process.argv.slice(2).join(' ');
