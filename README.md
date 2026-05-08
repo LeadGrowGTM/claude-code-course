@@ -20,8 +20,30 @@ npm i -g @anthropic-ai/claude-code
 ```
 
 4. Run `claude` and follow the auth flow
-5. Clone this repo and copy `starter/` into your workspace
-6. Start building
+5. Create a `.env` file in your workspace root with your API keys:
+
+```env
+# Core (you'll need these for most examples)
+OPENAI_API_KEY=sk-...
+SERPER_API_KEY=...
+
+# Web scraping (for pipelines that fetch pages)
+SPIDER_API_KEY=spider_...
+
+# Database (for pipelines that store results)
+SUPABASE_PROJECT_URL=https://xxxxxxxxxxxx.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=eyJ...
+
+# Scheduled tasks (for cloud-deployed pipelines)
+TRIGGER_SECRET_KEY=tr_secret_...
+
+# Add more as you need them -- each example lists its required keys
+```
+
+> **Important:** Add `.env` to your `.gitignore` so you never commit secrets. The starter `.gitignore` already includes it.
+
+6. Clone this repo and copy `starter/` into your workspace
+7. Start building
 
 ## What's In This Repo
 
@@ -56,6 +78,7 @@ Working examples from the course. Drop these into `.claude/skills/` in your work
 - **reddit-find/** -- Mine Reddit for pain points, buyer language, and content angles
 - **youtube-transcript/** -- Fetch and analyze YouTube transcripts for content and research
 - **call-context/** -- Turn sales call transcripts into campaign-ready briefs
+- **product-launch-monitor/** -- Full end-to-end pipeline: scrape Product Hunt + tech news daily, classify with GPT, store in Supabase, serve via API. Complete setup guide with SQL, architecture, and cost breakdown.
 - **.mcp.json** -- Starter MCP server config (Context7 pre-configured)
 
 ## Essential Tools & Repos
